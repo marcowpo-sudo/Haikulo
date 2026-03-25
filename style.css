@@ -1,0 +1,176 @@
+:root {
+    --color-bg-base: #fff0f5; 
+    --color-text-title: #4a1d2e; 
+    --color-text-main: #333333;  
+    --color-sakura: #ffb7c5;
+    --color-btn-gen: #800000; 
+    --color-shadow: rgba(0, 0, 0, 0.05);
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--color-bg-base);
+    background-image: 
+        radial-gradient(at 10% 10%, #ffe4e1 0px, transparent 50%),
+        radial-gradient(at 90% 90%, #f7e0e5 0px, transparent 60%);
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    color: var(--color-text-main);
+    overflow: hidden;
+    position: relative;
+}
+
+#sakura-container {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 1;
+}
+
+.petal {
+    position: absolute;
+    background-color: var(--color-sakura);
+    border-radius: 15px 0 15px 15px;
+    opacity: 0.7;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translate(0, -10px) rotate(0deg); opacity: 0.7; }
+    100% { transform: translate(100px, 100vh) rotate(360deg); opacity: 0; }
+}
+
+/* --- Il ritorno del Riquadro (Elegante e Satinato) --- */
+.haiku-main-wrapper {
+    background-color: rgba(255, 255, 255, 0.85); /* Box semi-trasparente */
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(255, 182, 193, 0.5); /* Bordo delicato */
+    backdrop-filter: blur(8px); /* Effetto vetro satinato */
+    text-align: center;
+    max-width: 650px;
+    width: 85%;
+    position: relative;
+    z-index: 2; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 450px; /* Altezza fissa ma non esagerata */
+}
+
+/* Decorazioni d'angolo ripristinate */
+.haiku-main-wrapper::before, .haiku-main-wrapper::after {
+    content: '✿';
+    position: absolute;
+    color: var(--color-sakura);
+    font-size: 1.2em;
+    opacity: 0.6;
+}
+.haiku-main-wrapper::before { top: 15px; left: 15px; }
+.haiku-main-wrapper::after { bottom: 15px; right: 15px; }
+
+
+.header-minimal {
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-family: 'Cormorant Garamond', serif; 
+    font-weight: 700;
+    font-size: 3em; 
+    margin: 0;
+    color: var(--color-text-title);
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic;
+    font-weight: 400;
+    margin-top: 5px;
+    margin-bottom: 0;
+    color: #8b5a2b;
+    font-size: 1.1em;
+    opacity: 0.8;
+}
+
+/* --- L'Haiku - Dimensione "Via di Mezzo" --- */
+.haiku-display {
+    font-family: 'Cormorant Garamond', serif; 
+    font-size: 2.8em; /* La via di mezzo perfetta (prima era 1.6 poi 5.5) */
+    font-weight: 600; 
+    line-height: 1.4; 
+    margin: auto 0;
+    color: var(--color-text-main);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: opacity 0.4s ease-in-out;
+    opacity: 1;
+}
+
+.haiku-display.fade-out { opacity: 0; }
+
+.footer-actions {
+    margin-top: 20px;
+}
+
+button.btn-genera {
+    background-color: transparent;
+    color: var(--color-text-title);
+    border: 2px solid var(--color-text-title);
+    padding: 10px 24px; 
+    font-size: 1em;
+    font-family: 'Open Sans', serif; 
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+button.btn-genera:hover {
+    background-color: rgba(128, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+button.btn-genera:active {
+    transform: scale(0.95);
+}
+
+#share-icon-btn {
+    position: fixed;
+    top: 20px; right: 20px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    border: 1px solid rgba(255, 182, 193, 0.5);
+    cursor: pointer;
+    z-index: 10; 
+    opacity: 0.7;
+    transition: all 0.3s;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+#share-icon-btn:hover {
+    opacity: 1;
+    background-color: white;
+}
+#share-icon-btn svg {
+    width: 22px; height: 22px;
+    fill: var(--color-text-title); 
+}
+
+/* --- Mobile --- */
+@media (max-width: 600px) {
+    .haiku-main-wrapper { min-height: 380px; padding: 30px 20px; width: 88%; }
+    h1 { font-size: 2.5em; }
+    .subtitle { font-size: 1em; }
+    .haiku-display { font-size: 2.1em; } /* Via di mezzo anche per mobile */
+    #share-icon-btn { top: 15px; right: 15px; padding: 8px; }
+    #share-icon-btn svg { width: 18px; height: 18px; }
+}
