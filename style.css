@@ -8,7 +8,8 @@
 }
 
 body {
-    font-family: 'Open Sans', sans-serif;
+    /* Impostiamo il font di base su Cormorant Garamond */
+    font-family: 'Cormorant Garamond', serif; 
     background-color: var(--color-bg-base);
     background-image: 
         radial-gradient(at 10% 10%, #ffe4e1 0px, transparent 50%),
@@ -33,27 +34,26 @@ body {
 
 .petal {
     position: absolute;
-    top: -50px; /* Partenza FUORI dallo schermo in alto */
+    top: -50px; 
     background-color: var(--color-sakura);
     border-radius: 15px 0 15px 15px;
-    opacity: 0; /* Iniziano invisibili e fanno fade-in */
+    opacity: 0; 
     animation: fall linear infinite;
 }
 
 @keyframes fall {
     0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
     10% { opacity: 0.7; }
-    100% { transform: translate(100px, 110vh) rotate(360deg); opacity: 0; } /* Finiscono oltre lo schermo */
+    100% { transform: translate(100px, 110vh) rotate(360deg); opacity: 0; } 
 }
 
-/* --- Box Riquadro - Effetto "Fade" Leggero e Vetro --- */
 .haiku-main-wrapper {
-    background-color: rgba(255, 255, 255, 0.35); /* Molto più bianco trasparente (fade) */
+    background-color: rgba(255, 255, 255, 0.35); 
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
     border: 1px solid rgba(255, 182, 193, 0.3);
-    backdrop-filter: blur(12px); /* Effetto vetro sfocato per compensare la trasparenza */
+    backdrop-filter: blur(12px); 
     text-align: center;
     max-width: 650px;
     width: 85%;
@@ -89,21 +89,20 @@ h1 {
 }
 
 .subtitle {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Cormorant Garamond', serif; /* Font aggiornato: più elegante */
     font-style: italic;
-    font-weight: 400;
+    font-weight: 600; /* Leggermente più spesso per compensare la finezza del font serif */
     margin-top: 5px;
     margin-bottom: 0;
     color: #8b5a2b;
-    font-size: 1.1em;
-    opacity: 0.8;
+    font-size: 1.4em; /* Dimensioni leggermente aumentate */
+    opacity: 0.9;
 }
 
-/* --- L'Haiku - Adattamento a 3 righe --- */
 .haiku-display {
     font-family: 'Cormorant Garamond', serif; 
-    /* clamp() restringe la frase se lo schermo è troppo stretto */
-    font-size: clamp(1.2rem, 5.5vw, 2.8rem); 
+    /* Aumentati i valori base e vw (1.4rem e 6.5vw) per renderlo più grande su mobile */
+    font-size: clamp(1.4rem, 6.5vw, 2.8rem); 
     font-weight: 600; 
     line-height: 1.4; 
     margin: auto 0;
@@ -113,7 +112,7 @@ h1 {
     justify-content: center;
     transition: opacity 0.4s ease-in-out;
     opacity: 1;
-    white-space: nowrap; /* Impedisce TASSATIVAMENTE di andare a capo */
+    white-space: nowrap; 
     width: 100%;
 }
 
@@ -125,34 +124,41 @@ h1 {
     justify-content: center;
 }
 
-/* --- Nuovo Tasto Fiore Animato --- */
+/* --- Bottone Animato (Risolto lo sfarfallio con accelerazione hardware) --- */
 .btn-genera-fiore {
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Rimbalzo al click */
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: inline-flex;
     justify-content: center;
     align-items: center;
     outline: none;
+    /* Proprietà per forzare il rendering della scheda video ed evitare sfarfallii */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
 }
 
 .flower-icon {
     display: inline-block;
     color: var(--color-btn-gen);
-    font-size: 3.5em; /* Dimensione del fiore */
+    font-size: 3.5em; 
     line-height: 1;
     text-shadow: 0 4px 10px rgba(128, 0, 0, 0.15);
-    animation: spin 12s linear infinite; /* Rotazione continua lenta */
+    animation: spin 12s linear infinite; 
+    /* Accelerazione hardware per l'elemento interno che ruota */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
 }
 
-/* Animazioni Interazione */
 .btn-genera-fiore:hover {
-    transform: scale(1.15); /* Il bottone si ingrandisce al passaggio */
+    transform: scale(1.15) translateZ(0);
 }
 .btn-genera-fiore:active {
-    transform: scale(0.85); /* Si rimpicciolisce al click */
+    transform: scale(0.85) translateZ(0);
 }
 
 @keyframes spin {
@@ -184,18 +190,17 @@ h1 {
     fill: var(--color-text-title); 
 }
 
-/* --- Mobile (Ottimizzato con più margini) --- */
+/* --- Mobile --- */
 @media (max-width: 600px) {
     .haiku-main-wrapper { 
-        min-height: 380px; 
-        padding: 30px 15px; /* Meno padding laterale interno */
-        width: 80%;         /* Ridotta la larghezza per più margine dai bordi */
+        min-height: 320px; /* Ridotta l'altezza minima da 380 a 320px */
+        padding: 25px 15px; /* Leggermente ridotto il padding superiore e inferiore */
+        width: 85%;         
         max-width: 90vw; 
     }
     h1 { font-size: 2.5em; }
-    .subtitle { font-size: 1em; }
-    /* La dimensione del testo gestita automaticamente da clamp() sopra */
+    .subtitle { font-size: 1.2em; }
     #share-icon-btn { top: 15px; right: 15px; padding: 8px; }
     #share-icon-btn svg { width: 18px; height: 18px; }
-    .flower-icon { font-size: 3em; } /* Fiore leggermente più piccolo su mobile */
+    .flower-icon { font-size: 3em; } 
 }
