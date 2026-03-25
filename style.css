@@ -33,25 +33,27 @@ body {
 
 .petal {
     position: absolute;
+    top: -50px; /* Partenza FUORI dallo schermo in alto */
     background-color: var(--color-sakura);
     border-radius: 15px 0 15px 15px;
-    opacity: 0.7;
+    opacity: 0; /* Iniziano invisibili e fanno fade-in */
     animation: fall linear infinite;
 }
 
 @keyframes fall {
-    0% { transform: translate(0, -10px) rotate(0deg); opacity: 0.7; }
-    100% { transform: translate(100px, 100vh) rotate(360deg); opacity: 0; }
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.7; }
+    100% { transform: translate(100px, 110vh) rotate(360deg); opacity: 0; } /* Finiscono oltre lo schermo */
 }
 
-/* --- Il ritorno del Riquadro (Elegante e Satinato) --- */
+/* --- Box Riquadro - Effetto "Fade" Leggero e Vetro --- */
 .haiku-main-wrapper {
-    background-color: rgba(255, 255, 255, 0.85); /* Box semi-trasparente */
+    background-color: rgba(255, 255, 255, 0.35); /* Molto più bianco trasparente (fade) */
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-    border: 1px solid rgba(255, 182, 193, 0.5); /* Bordo delicato */
-    backdrop-filter: blur(8px); /* Effetto vetro satinato */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(255, 182, 193, 0.3);
+    backdrop-filter: blur(12px); /* Effetto vetro sfocato per compensare la trasparenza */
     text-align: center;
     max-width: 650px;
     width: 85%;
@@ -60,10 +62,9 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 450px; /* Altezza fissa ma non esagerata */
+    min-height: 450px; 
 }
 
-/* Decorazioni d'angolo ripristinate */
 .haiku-main-wrapper::before, .haiku-main-wrapper::after {
     content: '✿';
     position: absolute;
@@ -73,7 +74,6 @@ body {
 }
 .haiku-main-wrapper::before { top: 15px; left: 15px; }
 .haiku-main-wrapper::after { bottom: 15px; right: 15px; }
-
 
 .header-minimal {
     margin-bottom: 20px;
@@ -99,10 +99,11 @@ h1 {
     opacity: 0.8;
 }
 
-/* --- L'Haiku - Dimensione "Via di Mezzo" --- */
+/* --- L'Haiku - Adattamento a 3 righe --- */
 .haiku-display {
     font-family: 'Cormorant Garamond', serif; 
-    font-size: 2.8em; /* La via di mezzo perfetta (prima era 1.6 poi 5.5) */
+    /* clamp() restringe la frase se lo schermo è troppo stretto */
+    font-size: clamp(1.2rem, 5.5vw, 2.8rem); 
     font-weight: 600; 
     line-height: 1.4; 
     margin: auto 0;
@@ -112,32 +113,50 @@ h1 {
     justify-content: center;
     transition: opacity 0.4s ease-in-out;
     opacity: 1;
+    white-space: nowrap; /* Impedisce TASSATIVAMENTE di andare a capo */
+    width: 100%;
 }
 
 .haiku-display.fade-out { opacity: 0; }
 
 .footer-actions {
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
 }
 
-button.btn-genera {
-    background-color: transparent;
-    color: var(--color-text-title);
-    border: 2px solid var(--color-text-title);
-    padding: 10px 24px; 
-    font-size: 1em;
-    font-family: 'Open Sans', serif; 
-    font-weight: 600;
-    border-radius: 30px;
+/* --- Nuovo Tasto Fiore Animato --- */
+.btn-genera-fiore {
+    background: none;
+    border: none;
+    padding: 0;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Rimbalzo al click */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
 }
-button.btn-genera:hover {
-    background-color: rgba(128, 0, 0, 0.05);
-    transform: translateY(-2px);
+
+.flower-icon {
+    display: inline-block;
+    color: var(--color-btn-gen);
+    font-size: 3.5em; /* Dimensione del fiore */
+    line-height: 1;
+    text-shadow: 0 4px 10px rgba(128, 0, 0, 0.15);
+    animation: spin 12s linear infinite; /* Rotazione continua lenta */
 }
-button.btn-genera:active {
-    transform: scale(0.95);
+
+/* Animazioni Interazione */
+.btn-genera-fiore:hover {
+    transform: scale(1.15); /* Il bottone si ingrandisce al passaggio */
+}
+.btn-genera-fiore:active {
+    transform: scale(0.85); /* Si rimpicciolisce al click */
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
 }
 
 #share-icon-btn {
@@ -165,12 +184,18 @@ button.btn-genera:active {
     fill: var(--color-text-title); 
 }
 
-/* --- Mobile --- */
+/* --- Mobile (Ottimizzato con più margini) --- */
 @media (max-width: 600px) {
-    .haiku-main-wrapper { min-height: 380px; padding: 30px 20px; width: 88%; }
+    .haiku-main-wrapper { 
+        min-height: 380px; 
+        padding: 30px 15px; /* Meno padding laterale interno */
+        width: 80%;         /* Ridotta la larghezza per più margine dai bordi */
+        max-width: 90vw; 
+    }
     h1 { font-size: 2.5em; }
     .subtitle { font-size: 1em; }
-    .haiku-display { font-size: 2.1em; } /* Via di mezzo anche per mobile */
+    /* La dimensione del testo gestita automaticamente da clamp() sopra */
     #share-icon-btn { top: 15px; right: 15px; padding: 8px; }
     #share-icon-btn svg { width: 18px; height: 18px; }
+    .flower-icon { font-size: 3em; } /* Fiore leggermente più piccolo su mobile */
 }
