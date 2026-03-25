@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Haikulo - L'Arte Rotonda</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4a1d2e">
+    
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Haikulo">
+
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -28,11 +37,23 @@
 
         <div class="footer-actions">
             <button class="btn-genera-fiore" onclick="generaHaikulo()" title="Genera nuova poesia">
-                <span class="flower-icon">✿</span>
+                <span class="flower-scale-wrapper">
+                    <span class="flower-icon">✿</span>
+                </span>
             </button>
         </div>
     </div>
 
     <script src="script.js"></script>
+    
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('Service Worker registrato! 😎', reg))
+            .catch(err => console.log('Errore Service Worker', err));
+        });
+      }
+    </script>
 </body>
 </html>

@@ -1,0 +1,31 @@
+{
+  "name": "Haikulo - L'Arte Rotonda",
+  "short_name": "Haikulo",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fff0f5",
+  "theme_color": "#4a1d2e",
+  "scope": "./",
+  "lang": "it-IT",
+  "description": "Generatore di poesia tonda e perfetta"
+}

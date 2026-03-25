@@ -8,7 +8,6 @@
 }
 
 body {
-    /* Impostiamo il font di base su Cormorant Garamond */
     font-family: 'Cormorant Garamond', serif; 
     background-color: var(--color-bg-base);
     background-image: 
@@ -47,6 +46,7 @@ body {
     100% { transform: translate(100px, 110vh) rotate(360deg); opacity: 0; } 
 }
 
+/* --- Box Riquadro - Effetto Fade/Vetro Ripristinato e Intatto --- */
 .haiku-main-wrapper {
     background-color: rgba(255, 255, 255, 0.35); 
     padding: 40px;
@@ -54,6 +54,7 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
     border: 1px solid rgba(255, 182, 193, 0.3);
     backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px);
     text-align: center;
     max-width: 650px;
     width: 85%;
@@ -89,19 +90,18 @@ h1 {
 }
 
 .subtitle {
-    font-family: 'Cormorant Garamond', serif; /* Font aggiornato: più elegante */
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-weight: 600; /* Leggermente più spesso per compensare la finezza del font serif */
+    font-weight: 600; 
     margin-top: 5px;
     margin-bottom: 0;
     color: #8b5a2b;
-    font-size: 1.4em; /* Dimensioni leggermente aumentate */
+    font-size: 1.4em; 
     opacity: 0.9;
 }
 
 .haiku-display {
     font-family: 'Cormorant Garamond', serif; 
-    /* Aumentati i valori base e vw (1.4rem e 6.5vw) per renderlo più grande su mobile */
     font-size: clamp(1.4rem, 6.5vw, 2.8rem); 
     font-weight: 600; 
     line-height: 1.4; 
@@ -124,44 +124,45 @@ h1 {
     justify-content: center;
 }
 
-/* --- Bottone Animato (Risolto lo sfarfallio con accelerazione hardware) --- */
+/* --- Tasto Animato (Zero Sfarfallio, Rotazione Garantita) --- */
 .btn-genera-fiore {
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: inline-flex;
     justify-content: center;
     align-items: center;
     outline: none;
-    /* Proprietà per forzare il rendering della scheda video ed evitare sfarfallii */
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    transform: translateZ(0);
+    -webkit-tap-highlight-color: transparent; 
 }
 
-.flower-icon {
+/* Questo wrapper gestisce SOLO lo zoom al passaggio del mouse */
+.flower-scale-wrapper {
     display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Questo elemento gestisce SOLO la rotazione costante */
+.flower-icon {
+    display: inline-block; 
     color: var(--color-btn-gen);
     font-size: 3.5em; 
     line-height: 1;
     text-shadow: 0 4px 10px rgba(128, 0, 0, 0.15);
-    animation: spin 12s linear infinite; 
-    /* Accelerazione hardware per l'elemento interno che ruota */
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    transform: translateZ(0);
+    animation: spin 16s linear infinite; 
 }
 
-.btn-genera-fiore:hover {
-    transform: scale(1.15) translateZ(0);
+/* Applichiamo lo zoom al wrapper, senza disturbare la rotazione dell'icona */
+.btn-genera-fiore:hover .flower-scale-wrapper {
+    transform: scale(1.15);
 }
-.btn-genera-fiore:active {
-    transform: scale(0.85) translateZ(0);
+.btn-genera-fiore:active .flower-scale-wrapper {
+    transform: scale(0.85);
 }
 
 @keyframes spin {
+    0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
@@ -180,6 +181,7 @@ h1 {
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 #share-icon-btn:hover {
     opacity: 1;
@@ -193,8 +195,8 @@ h1 {
 /* --- Mobile --- */
 @media (max-width: 600px) {
     .haiku-main-wrapper { 
-        min-height: 320px; /* Ridotta l'altezza minima da 380 a 320px */
-        padding: 25px 15px; /* Leggermente ridotto il padding superiore e inferiore */
+        min-height: 320px; 
+        padding: 25px 15px; 
         width: 85%;         
         max-width: 90vw; 
     }

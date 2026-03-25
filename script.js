@@ -1,87 +1,10 @@
-// --- [RIFERIMENTO 1: IL DATABASE TITANICO DA 512.000 COMBINAZIONI] ---
-
-// Riga 1: 5 sillabe (80 frasi)
-const versiA = [
-    "Doppia collina", "Tonda dolcezza", "Due forme amiche", "Bella curva lì", 
-    "Sogno di carne", "Lì ci si siede", "Morbida curva", "Piena armonia", 
-    "Forma perfetta", "L'occhio si posa", "Soffice dono", "Sostegno caldo", 
-    "Arte del corpo", "Base sicura", "Punto d'appoggio", "Orizzonte tondo", 
-    "Soffice peso", "Morbido ponte", "Due lune rosa", "Pietra preziosa", 
-    "Sogno d'estate", "Bella rotonda", "Sempre presente", "Fianco sinuoso", 
-    "Anima calda", "Base del mondo", "Dono prezioso", "Forma che vive", 
-    "Sguardo furtivo", "Pietra levigata", "Morbido fiore", "Onda che passa", 
-    "Soffio di vita", "Collina bianca", "Punto di luce", "Sogno sospeso", 
-    "La simmetria", "Curva scolpita", "Morbido letto", "Senza confini",
-    "Pesca d'estate", "Dolce rifugio", "Marmo di luna", "Calda accoglienza", 
-    "Seta leggera", "Tondo mistero", "Nuvola piena", "Forza nascosta", 
-    "Soffice nido", "L'arco d'argento", "Curva di luce", "Pura magia", 
-    "Ritmo silente", "Palla di neve", "Soffice vanto", "Tela d'artista", 
-    "Morbida culla", "Vera bellezza", "Sogno segreto", "Nobile forma", 
-    "Pura poesia", "Centro del mondo", "Soffice luna", "Tondo gioiello", 
-    "Morbida pesca", "Tratto d'artista", "Dolce scultura", "Forza vitale", 
-    "Culla dei sogni", "Curva divina", "Soffice posa", "Onda di mare", 
-    "L'arte perfetta", "Soffio leggero", "Magico tondo", "Forma decisa", 
-    "Soffice danza", "Tonda magia", "Punto di forza", "Morbido incanto"
-];
-
-// Riga 2: 7 sillabe (80 frasi)
-const versiB = [
-    "Morbida per sedersi", "Regge il peso del mondo", "Due mezze lune piene", 
-    "Come pesca matura", "Quando cammini oscilla", "Jeans stretti e gran fatica", 
-    "Salda radice e forza", "Dolce collina rosa", "L'arte si fa rotonda", 
-    "Attira sguardi audaci", "Cuscino di ogni sera", "Scolpita nella carne", 
-    "Oscilla a ritmo lento", "Sempre ci segue dietro", "Forma che incanta l'occhio", 
-    "Quando si balla ruota", "Morbida come un fiore", "Due guance sempre piene", 
-    "Forte ma delicato", "Regge il tuo riposo", "In ogni posa splende", 
-    "Soffice come nuvola", "Dolce come il buon miele", "Scolpita dal respiro", 
-    "Oscilla e poi si ferma", "Sempre ci guarda il dorso", "Porta la nostra forza", 
-    "Morbida come l'acqua", "Bella curva di carne", "Danza con ogni passo", 
-    "Sempre al nostro bel fianco", "Orizzonte che vibra", "Regge l'intero corpo", 
-    "Morbido punto d'ombra", "Collina che si muove", "Quando ti siedi ride", 
-    "Forma che mai si stanca", "Morbida come seta", "Bella forma perfetta", 
-    "Scolpita dalla vita", "Sembra di stare in cielo", "Culla per le fatiche", 
-    "Morbido scivolo d'oro", "Due nuvole di sogni", "Centro del nostro moto", 
-    "Un quadro di bravura", "Morbido accoglimento", "Nasconde il vero centro", 
-    "Forza che ci sostiene", "Come la luna piena", "Morbida sensazione", 
-    "Che bella prospettiva", "Morbido appoggio al suolo", "Danza senza canzone", 
-    "Onda che si rinnova", "Come un fiore di loto", "Scultura senza tempo", 
-    "Soffice come spuma", "Curva che toglie il fiato", "Regno della morbidezza", 
-    "Bella da contemplare", "Forma d'antica dea", "Morbida tentazione", 
-    "Regge il respiro affannato", "Come un cuscino caldo", "Onda che mai si ferma", 
-    "Due specchi di dolcezza", "Bella natura morta", "Segreto ben celato", 
-    "Forza di gravità", "Attira i pensieri", "Morbida meraviglia", 
-    "Un arco di trionfo", "Dolce peso leggero", "Sinfonia di curve", 
-    "Soffice consistenza", "Forma che il vento accarezza", "Morbido contrappeso", 
-    "Centro dell'armonia", "Bella senza pudore"
-];
-
-// Riga 3: 5 sillabe (80 frasi)
-const versiC = [
-    "Che gran sedere", "Cuscino per me", "Opera d'arte", "Ritmo che incanta", 
-    "Dolce riposo", "Senza parole", "Sostegno caldo", "Amore tondo", 
-    "Carne viva lì", "Bello da vedere", "Guarda che roba", "Forma sincera", 
-    "Base del corpo", "Tondo sorriso", "Sogno di carne", "Sempre fedele", 
-    "Soffice peso", "Forma sospesa", "Opera viva", "Bello da toccare", 
-    "Forte appoggio", "Dono di carne", "Sogno d'estate", "Morbido dono", 
-    "Anima tonda", "La simmetria", "Sempre presente", "Che bella curva", 
-    "Morbida carne", "Base sicura", "Pietra di luce", "Orizzonte blu", 
-    "Tondo respiro", "Senza parole", "Soffice dono", "Morbida roccia", 
-    "Punto di pace", "Fianco sicuro", "Carne preziosa", "Perfetto così",
-    "Vera bellezza", "Morbida posa", "Tondo tesoro", "Sogno segreto", 
-    "Forma divina", "Magica luna", "Dolce scultura", "Tonda armonia", 
-    "Pura delizia", "Culla dei sogni", "Centro del mondo", "Soffice vanto", 
-    "Onda d'amore", "Punto di forza", "Morbida pace", "Bella visione", 
-    "Tondo piacere", "Forma decisa", "Nobile curva", "Sogno ad occhi", 
-    "Soffice nido", "Pura magia", "Arte segreta", "Tratto d'artista", 
-    "Morbido letto", "Senza confini", "Palla di neve", "Soffice luna", 
-    "Tondo mistero", "Marmo di luna", "Caldo riposo", "Forza nascosta", 
-    "Seta leggera", "Curva di luce", "Soffice danza", "Magico tondo", 
-    "Dolce rifugio", "Pura poesia", "L'arco d'argento", "Morbido incanto"
-];
+// --- [RIFERIMENTO 1] ---
+const versiA = ["Doppia collina", "Tonda dolcezza", "Due forme amiche", "Bella curva lì", "Sogno di carne", "Lì ci si siede", "Morbida curva", "Piena armonia", "Forma perfetta", "L'occhio si posa", "Soffice dono", "Sostegno caldo", "Arte del corpo", "Base sicura", "Punto d'appoggio", "Orizzonte tondo", "Soffice peso", "Morbido ponte", "Due lune rosa", "Pietra preziosa", "Sogno d'estate", "Bella rotonda", "Sempre presente", "Fianco sinuoso", "Anima calda", "Base del mondo", "Dono prezioso", "Forma che vive", "Sguardo furtivo", "Pietra levigata", "Morbido fiore", "Onda che passa", "Soffio di vita", "Collina bianca", "Punto di luce", "Sogno sospeso", "La simmetria", "Curva scolpita", "Morbido letto", "Senza confini", "Pesca d'estate", "Dolce rifugio", "Marmo di luna", "Calda accoglienza", "Seta leggera", "Tondo mistero", "Nuvola piena", "Forza nascosta", "Soffice nido", "L'arco d'argento", "Curva di luce", "Pura magia", "Ritmo silente", "Palla di neve", "Soffice vanto", "Tela d'artista", "Morbida culla", "Vera bellezza", "Sogno segreto", "Nobile forma", "Pura poesia", "Centro del mondo", "Soffice luna", "Tondo gioiello", "Morbida pesca", "Tratto d'artista", "Dolce scultura", "Forza vitale", "Culla dei sogni", "Curva divina", "Soffice posa", "Onda di mare", "L'arte perfetta", "Soffio leggero", "Magico tondo", "Forma decisa", "Soffice danza", "Tonda magia", "Punto di forza", "Morbido incanto"];
+const versiB = ["Morbida per sedersi", "Regge il peso del mondo", "Due mezze lune piene", "Come pesca matura", "Quando cammini oscilla", "Jeans stretti e gran fatica", "Salda radice e forza", "Dolce collina rosa", "L'arte si fa rotonda", "Attira sguardi audaci", "Cuscino di ogni sera", "Scolpita nella carne", "Oscilla a ritmo lento", "Sempre ci segue dietro", "Forma che incanta l'occhio", "Quando si balla ruota", "Morbida come un fiore", "Due guance sempre piene", "Forte ma delicato", "Regge il tuo riposo", "In ogni posa splende", "Soffice come nuvola", "Dolce come il buon miele", "Scolpita dal respiro", "Oscilla e poi si ferma", "Sempre ci guarda il dorso", "Porta la nostra forza", "Morbida come l'acqua", "Bella curva di carne", "Danza con ogni passo", "Sempre al nostro bel fianco", "Orizzonte che vibra", "Regge l'intero corpo", "Morbido punto d'ombra", "Collina che si muove", "Quando ti siedi ride", "Forma che mai si stanca", "Morbida come seta", "Bella forma perfetta", "Scolpita dalla vita", "Sembra di stare in cielo", "Culla per le fatiche", "Morbido scivolo d'oro", "Due nuvole di sogni", "Centro del nostro moto", "Un quadro di bravura", "Morbido accoglimento", "Nasconde il vero centro", "Forza che ci sostiene", "Come la luna piena", "Morbida sensazione", "Che bella prospettiva", "Morbido appoggio al suolo", "Danza senza canzone", "Onda che si rinnova", "Come un fiore di loto", "Scultura senza tempo", "Soffice come spuma", "Curva che toglie il fiato", "Regno della morbidezza", "Bella da contemplare", "Forma d'antica dea", "Morbida tentazione", "Regge il respiro affannato", "Come un cuscino caldo", "Onda che mai si ferma", "Due specchi di dolcezza", "Bella natura morta", "Segreto ben celato", "Forza di gravità", "Attira i pensieri", "Morbida meraviglia", "Un arco di trionfo", "Dolce peso leggero", "Sinfonia di curve", "Soffice consistenza", "Forma che il vento accarezza", "Morbido contrappeso", "Centro dell'armonia", "Bella senza pudore"];
+const versiC = ["Che gran sedere", "Cuscino per me", "Opera d'arte", "Ritmo che incanta", "Dolce riposo", "Senza parole", "Sostegno caldo", "Amore tondo", "Carne viva lì", "Bello da vedere", "Guarda che roba", "Forma sincera", "Base del corpo", "Tondo sorriso", "Sogno di carne", "Sempre fedele", "Soffice peso", "Forma sospesa", "Opera viva", "Bello da toccare", "Forte appoggio", "Dono di carne", "Sogno d'estate", "Morbido dono", "Anima tonda", "La simmetria", "Sempre presente", "Che bella curva", "Morbida carne", "Base sicura", "Pietra di luce", "Orizzonte blu", "Tondo respiro", "Senza parole", "Soffice dono", "Morbida roccia", "Punto di pace", "Fianco sicuro", "Carne preziosa", "Perfetto così", "Vera bellezza", "Morbida posa", "Tondo tesoro", "Sogno segreto", "Forma divina", "Magica luna", "Dolce scultura", "Tonda armonia", "Pura delizia", "Culla dei sogni", "Centro del mondo", "Soffice vanto", "Onda d'amore", "Punto di forza", "Morbida pace", "Bella visione", "Tondo piacere", "Forma decisa", "Nobile curva", "Sogno ad occhi", "Soffice nido", "Pura magia", "Arte segreta", "Tratto d'artista", "Morbido letto", "Senza confini", "Palla di neve", "Soffice luna", "Tondo mistero", "Marmo di luna", "Caldo riposo", "Forza nascosta", "Seta leggera", "Curva di luce", "Soffice danza", "Magico tondo", "Dolce rifugio", "Pura poesia", "L'arco d'argento", "Morbido incanto"];
 
 let ultimoHaikuRaw = ""; 
 
-// --- [RIFERIMENTO 2: LOGICA DEL "SACCHETTO" PER LA PESCA CASUALE] ---
 class RandomBag {
     constructor(items) {
         this.originalItems = [...items];
@@ -99,7 +22,6 @@ const bagA = new RandomBag(versiA);
 const bagB = new RandomBag(versiB);
 const bagC = new RandomBag(versiC);
 
-// --- [RIFERIMENTO 3: AGGIORNAMENTO DELL'INTERFACCIA] ---
 function generaHaikulo() {
     const haikuBox = document.getElementById('haikuBox');
     haikuBox.classList.add('fade-out');
@@ -117,7 +39,7 @@ function generaHaikulo() {
     }, 400);
 }
 
-// --- [RIFERIMENTO 4: FUNZIONI DI CONDIVISIONE E WEB API] ---
+// --- [RIFERIMENTO 4: MODIFICATO IL TESTO CONDIVISIONE] ---
 async function condividiTutto() {
     if (!ultimoHaikuRaw) { alert("Genera prima un Haikulo!"); return; }
     const shareBtn = document.getElementById('share-icon-btn');
@@ -130,7 +52,9 @@ async function condividiTutto() {
         if (!imageBlob) throw new Error("Generazione immagine fallita.");
 
         const file = new File([imageBlob], "haikulo-poesia.png", { type: "image/png" });
-        const testoShare = `Un Haikulo per te:\n\n${ultimoHaikuRaw}\n\nGenerato su Haikulo ✿`;
+        
+        // TESTO CONDIVISIONE Richiesto (Vedi riga sotto)
+        const testoShare = 'Un Haikulo tutto per te ✿:\n\n' + ultimoHaikuRaw;
 
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
             await navigator.share({
@@ -151,7 +75,6 @@ async function condividiTutto() {
     }
 }
 
-// --- [RIFERIMENTO 5: CANVAS PER LO SCREENSHOT DA CONDIVIDERE] ---
 function generaScreenshotBlob() {
     return new Promise((resolve) => {
         const canvas = document.createElement('canvas');
@@ -210,7 +133,6 @@ function generaScreenshotBlob() {
     });
 }
 
-// --- [RIFERIMENTO 6: SISTEMA DEI PETALI (SAKURA) SULLO SFONDO] ---
 function creaPetalo() {
     const container = document.getElementById('sakura-container');
     if(!container) return;
@@ -227,5 +149,4 @@ function creaPetalo() {
 }
 setInterval(creaPetalo, 300);
 
-// Avvio iniziale per far comparire il primo haiku
 generaHaikulo();
